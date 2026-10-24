@@ -1,0 +1,64 @@
+/* Shrink real content, not just the scrollbar. Grid items default to min-width:auto. */
+.workspace,.main-content,.dashboard-top>*,.dashboard-bottom>*,.stats-grid>*,
+.plans-grid>*,.training-layout>*,.progress-grid>*,.coach-page>*{min-inline-size:0}
+.hero-content,.hero-main,.hero-bottom,.week-days>div,.plan-list-item>span,
+.exercise-nav>div,.section-heading>div,.recent-strip>div{min-inline-size:0}
+.hero-main h2,.plan-card h2,.plan-list-item b,.training-main>h2,.exercise-nav strong,
+.history-card h3,.dialog-content h2{overflow-wrap:anywhere}
+
+@media(max-width:640px){
+ :root{--mobile-gutter:16px}
+ html{scroll-padding-bottom:100px;-webkit-text-size-adjust:100%;text-size-adjust:100%}
+ body,#root,.app-frame,.workspace{inline-size:100%;max-inline-size:100%}
+ .main-content{padding-inline:max(var(--mobile-gutter),env(safe-area-inset-left)) max(var(--mobile-gutter),env(safe-area-inset-right));padding-bottom:calc(100px + env(safe-area-inset-bottom))}
+ .dashboard-top,.dashboard-bottom,.plans-grid,.progress-grid,.coach-page,.training-layout{grid-template-columns:minmax(0,1fr)}
+ .stats-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
+ .hero-card,.hero-content{min-height:340px}
+ .hero-content{padding:22px 20px}
+ .hero-main{padding:28px 0 22px}
+ .hero-main h2{font-size:clamp(28px,8.4vw,36px);line-height:1.14;letter-spacing:-1.1px}
+ .hero-main>p:last-child{font-size:12px;max-width:100%}
+ .hero-bottom .button{min-inline-size:0;white-space:normal;line-height:1.4;gap:10px}
+ .week-panel{padding:20px;display:grid;grid-template-columns:minmax(0,1fr) auto;gap:16px 10px}
+ .week-panel .panel-heading{grid-column:1/-1}
+ .week-panel h3{margin:0;font-size:clamp(18px,5.4vw,22px);max-width:none}
+ .week-score{position:static;margin:0;align-self:center;gap:7px}
+ .week-score>strong{font-size:42px}
+ .week-days{grid-column:1/-1;gap:6px;margin:0}
+ .week-days>div{flex:1 1 0}
+ .week-days span{aspect-ratio:auto;min-height:0;height:34px;min-width:0;width:100%}
+ .week-foot{grid-column:1/-1;margin:0;padding-top:14px;line-height:1.6}
+ .plans-panel,.coach-panel{padding:20px}
+ .section-heading{flex-wrap:wrap;row-gap:8px}
+ .plan-list-item{gap:11px}
+ .plan-list-item>span:nth-child(2){min-width:0}
+ .plan-list-item b{font-size:13px}
+ .training-outline{margin-inline:0;border:1px solid var(--border);border-radius:12px;max-width:100%;padding:8px;overscroll-behavior-inline:contain}
+ .training-inputs{grid-template-columns:repeat(2,minmax(0,1fr))}
+ .training-input,.training-input>div{min-width:0}
+ .training-input input{width:100%;min-width:0}
+ .progress-toolbar{flex-wrap:wrap}
+ .segmented{min-width:0;max-width:100%}
+ .mobile-nav{gap:0;padding-inline:max(8px,env(safe-area-inset-left)) max(8px,env(safe-area-inset-right))}
+ .mobile-nav button{flex:1 1 0;min-width:0;font-size:10px}
+ .icon-button{width:44px;height:44px}
+ .page-subtitle{font-size:12px}
+ .first-plan p,.coach-panel p{font-size:12px}
+ .stat-card .eyebrow{font-size:8px;letter-spacing:.7px;overflow-wrap:anywhere}
+ .stat-card>small{font-size:10px;line-height:1.6}
+ .dialog-content{max-width:calc(100% - 24px)}
+ .rep-inputs{grid-template-columns:repeat(3,minmax(0,1fr))}
+ .field-label,.input{min-width:0}
+}
+@media(max-width:359px){
+ :root{--mobile-gutter:12px}
+ .week-panel{padding:16px;gap:14px 8px}
+ .week-score>strong{font-size:36px}
+ .week-score>div{font-size:6px}
+ .hero-content{padding-inline:18px}
+ .page-heading h1{font-size:26px}
+ .stat-card{padding:15px 12px}
+ .training-main{padding:16px 12px}
+ .training-target b span{display:block;margin-top:2px}
+ .effort-details summary{font-size:11px}
+}

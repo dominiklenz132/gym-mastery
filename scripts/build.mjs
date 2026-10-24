@@ -5,6 +5,7 @@ import {Resvg} from '@resvg/resvg-js';
 mkdirSync('dist',{recursive:true});
 await build({entryPoints:['src/main.jsx'],bundle:true,minify:true,format:'iife',target:'es2022',outfile:'dist/app.js',define:{'process.env.NODE_ENV':'"production"'},loader:{'.webp':'dataurl'},logLevel:'warning'});
 execFileSync(process.execPath,['node_modules/@tailwindcss/cli/dist/index.mjs','-i','src/theme.css','-o','dist/styles.css','--minify'],{stdio:'inherit'});
+writeFileSync('dist/styles.css',readFileSync('dist/styles.css','utf8')+'\n'+readFileSync('src/mobile.css','utf8'));
 writeFileSync('dist/index.html',readFileSync('src/index.html'));
 let source=readFileSync('server/worker.js','utf8');
 const pngs=Object.fromEntries([192,512].map(size=>[size,Buffer.from(new Resvg(readFileSync('src/icon.svg'),{fitTo:{mode:'width',value:size}}).render().asPng()).toString('base64')]));
