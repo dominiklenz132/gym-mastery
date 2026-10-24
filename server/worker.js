@@ -1,5 +1,7 @@
 import {initialState,apply} from './domain.js';
 const HTML='__HTML__',CSS='__CSS__',JS='__JS__';
+const MANIFEST='__MANIFEST__',ICON='__ICON__',SW='__SW__';
+const PNGS='__PNGS__';
 const str={type:'string'},num={type:'number'},integer={type:'integer'};
 const specs={
  get_user_training_context:['Gespeicherte Pläne, aktive Einheit und Trainingshistorie laden. Beim Einstieg und in neuen Chats zuerst aufrufen.',{}],
@@ -32,6 +34,10 @@ async function run(env,user,name,args){
 }
 export default {async fetch(req,env){
  const url=new URL(req.url),user=req.headers.get('oai-authenticated-user-id');
+ if(req.method==='GET'&&url.pathname==='/manifest.webmanifest')return new Response(MANIFEST,{headers:{'Content-Type':'application/manifest+json'}});
+ if(req.method==='GET'&&url.pathname==='/icon.svg')return new Response(ICON,{headers:{'Content-Type':'image/svg+xml'}});
+ if(req.method==='GET'&&/^\/icon-(192|512)\.png$/.test(url.pathname)){const size=url.pathname.includes('192')?192:512;return new Response(Uint8Array.from(atob(PNGS[size]),c=>c.charCodeAt(0)),{headers:{'Content-Type':'image/png'}})}
+ if(req.method==='GET'&&url.pathname==='/sw.js')return new Response(SW,{headers:{'Content-Type':'application/javascript','Cache-Control':'no-cache','Service-Worker-Allowed':'/'}});
  if(req.method==='GET'&&url.pathname==='/styles.css')return new Response(CSS,{headers:{'Content-Type':'text/css'}});
  if(req.method==='GET'&&url.pathname==='/app.js')return new Response(JS,{headers:{'Content-Type':'application/javascript'}});
  if(req.method==='GET'&&url.pathname==='/')return new Response(HTML,{headers:{'Content-Type':'text/html','Cache-Control':'no-store'}});
@@ -50,7 +56,7 @@ export default {async fetch(req,env){
   if(method==='initialize')return ok({protocolVersion:params.protocolVersion||'2025-06-18',capabilities:{tools:{},resources:{}},serverInfo:{name:'GYM MASTERY',version:'1.0.0'},instructions:'Beim Öffnen get_user_training_context aufrufen. Trainingsdaten niemals erfinden. Bei unklaren Werten nachfragen. Neue Pläne, meine Pläne und Training fortsetzen anbieten. Schmerzen haben Vorrang vor Progression.'});
   if(method==='tools/list')return ok({tools});
   if(method==='resources/list')return ok({resources:[{uri:'ui://gym-mastery/app.html',name:'GYM MASTERY',mimeType:'text/html;profile=mcp-app'}]});
-  if(method==='resources/read')return ok({contents:[{uri:'ui://gym-mastery/app.html',mimeType:'text/html;profile=mcp-app',text:HTML.replace('<link rel="stylesheet" href="styles.css" />','<style>'+CSS+'</style>').replace('<script src="app.js"></script>','<script>'+JS+'</script>'),_meta:{ui:{prefersBorder:true},'openai/widgetPrefersBorder':true}}]});
+  if(method==='resources/read')return ok({contents:[{uri:'ui://gym-mastery/app.html',mimeType:'text/html;profile=mcp-app',text:HTML.replace('<link rel="stylesheet" href="styles.css" />',()=>'<style>'+CSS+'</style>').replace('<script src="app.js"></script>',()=>'<script>'+JS.replaceAll('</script','<\\/script')+'</script>'),_meta:{ui:{prefersBorder:true},'openai/widgetPrefersBorder':true}}]});
   if(method==='tools/call'){
    try{const out=await run(env,user,params.name,params.arguments||{});return ok({content:[{type:'text',text:JSON.stringify(out.result)}],structuredContent:out,_meta:{'openai/outputTemplate':'ui://gym-mastery/app.html'}})}catch(e){return ok({isError:true,content:[{type:'text',text:e.message}]})}
   }

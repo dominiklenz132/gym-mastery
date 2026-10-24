@@ -4,7 +4,9 @@ Independent web frontend and MCP training backend. No Base44 runtime, SDK or dat
 
 ## Run checks
 
-Node.js 20+: `npm test`, then `npm run build`. The build emits an ES module Worker at `dist/server/index.js`. Source is `server/worker.js`, `server/domain.js` and `dist/` frontend assets.
+Node.js 20+: `npm ci`, then `npm test`. The build emits an ES module Worker at `dist/server/index.js`. React source lives in `src/`, backend source in `server/`; `dist/` is generated. UI uses Tailwind CSS, adapted shadcn/ui-style Radix components and Lucide icons, with Manrope/DM Sans typography. Run `node scripts/dev.mjs` after building for isolated local visual QA.
+
+The standalone PWA has generated 192/512px icons, a manifest and an offline reconnect screen. It does not silently queue workout writes offline. Base44 is a separate visual experimentation lab, never a production dependency. See DESIGN-REDESIGN.md.
 
 ## Hosting
 
