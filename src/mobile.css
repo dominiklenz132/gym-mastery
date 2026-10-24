@@ -1,4 +1,9 @@
 /* Shrink real content, not just the scrollbar. Grid items default to min-width:auto. */
+.coach-chat-bottom>.field-label{display:block;margin-bottom:16px}
+.coach-draft{margin-bottom:16px}
+.coach-draft .input{font-family:monospace;font-size:14px}
+.coach-chat-bottom>.button{margin-bottom:12px}
+.coach-handoff-note{font-size:12px;line-height:1.7;color:var(--muted);margin-top:8px}
 .workspace,.main-content,.dashboard-top>*,.dashboard-bottom>*,.stats-grid>*,
 .plans-grid>*,.training-layout>*,.progress-grid>*,.coach-page>*{min-inline-size:0}
 .hero-content,.hero-main,.hero-bottom,.week-days>div,.plan-list-item>span,
