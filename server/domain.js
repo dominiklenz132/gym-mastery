@@ -29,7 +29,7 @@ export function apply(state,name,a){
   if(!Number.isFinite(a.weight)||a.weight<0||a.weight>1000||!Number.isInteger(a.reps)||a.reps<1||a.reps>100||!['kg','lb'].includes(a.unit)||a.rir!=null&&(!Number.isFinite(a.rir)||a.rir<0||a.rir>10))throw Error('Gewicht, Wiederholungen, Einheit oder RIR ungültig');
   const set={id:id(),requestId:a.requestId,exerciseId:a.exerciseId,weight:a.weight,reps:a.reps,unit:a.unit,rir:a.rir??null,pain:!!a.pain,createdAt:now()};s.sets.push(set);return set;
  }
- if(name==='finish_workout'){const s=session();s.status='completed';s.finishedAt=now();return s;}
+ if(name==='finish_workout'){const s=session();if(s.status==='completed')return s;s.status='completed';s.finishedAt=now();return s;}
  if(name==='save_training_preference'){if(!a.key||typeof a.value!=='string')throw Error('Präferenz fehlt');state.preferences[a.key]=a.value;return state.preferences;}
  if(name==='get_progression_recommendation'){const s=session(),e=s.exercises.find(e=>e.id===a.exerciseId);if(!e)throw Error('Übung nicht gefunden');const sets=s.sets.filter(x=>x.exerciseId===e.id);if(new Set(sets.map(x=>x.unit)).size>1)throw Error('Gemischte Gewichtseinheiten: zuerst in eine Einheit umrechnen');return progression(sets,e);}
  if(name==='list_training_plans')return state.plans;
