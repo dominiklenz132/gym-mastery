@@ -1,0 +1,86 @@
+<!doctype html>
+<html lang="de" data-theme="dark">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <meta name="theme-color" content="#070908" />
+  <title>GYM MASTERY</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <div class="noise" aria-hidden="true"></div>
+  <div class="app-shell">
+    <aside class="rail">
+      <a class="brand" href="#" aria-label="GYM MASTERY Startseite"><span class="brand-mark">GM</span><span>GYM<br>MASTERY</span></a>
+      <nav aria-label="Hauptnavigation">
+        <button class="nav-item active" data-view="dashboard" aria-label="Übersicht"><i data-icon="home"></i><span>Übersicht</span></button>
+        <button class="nav-item" data-view="workout" aria-label="Training"><i data-icon="dumbbell"></i><span>Training</span></button>
+        <button class="nav-item" data-view="progress" aria-label="Fortschritt"><i data-icon="chart"></i><span>Fortschritt</span></button>
+      </nav>
+      <button class="theme-toggle" aria-label="Farbschema wechseln" aria-pressed="false"><i data-icon="sun"></i></button>
+    </aside>
+
+    <main>
+      <section class="view active" id="dashboard" aria-labelledby="dash-title">
+        <header class="topbar"><div><p class="eyebrow">SAMSTAG · 24. OKTOBER</p><h1 id="dash-title">Bereit für <em>mehr.</em></h1></div><button class="avatar" aria-label="Profil von Dominik">DL</button></header>
+        <div class="hero-grid">
+          <article class="next-workout">
+            <div class="ambient"></div><div class="card-top"><span class="pill live"><b></b>NÄCHSTES TRAINING</span><span class="time">55 MIN</span></div>
+            <div class="hero-copy"><p>UPPER · WOCHE 6</p><h2>Oberkörper<br><span>Stärke</span></h2><p class="sub">6 Übungen · Fokus Brust & Rücken</p></div>
+            <div class="readiness"><div class="readiness-ring"><span>86</span><small>%</small></div><div><b>Bereitschaft hoch</b><span>Gute Voraussetzungen für Progression</span></div></div>
+            <button class="start-button" data-view="workout"><span>Training starten</span><i data-icon="arrow"></i></button>
+          </article>
+          <div class="side-stack">
+            <article class="coach-card"><div class="spark"><i data-icon="spark"></i></div><p class="eyebrow">COACHING IMPULS</p><h3>Heute zählt Kontrolle, nicht Tempo.</h3><p>Beim Bankdrücken bist du bereit für 52,5 kg. Lass 2 Wiederholungen im Tank.</p><button class="text-button">Warum diese Empfehlung? <i data-icon="chevron"></i></button></article>
+            <article class="week-card"><div class="section-head"><div><p class="eyebrow">DIESE WOCHE</p><h3>3 von 4</h3></div><span>75%</span></div><div class="week-dots"><div><b>M</b><i class="done"></i></div><div><b>D</b><i></i></div><div><b>M</b><i class="done"></i></div><div><b>D</b><i></i></div><div><b>F</b><i class="done"></i></div><div><b>S</b><i class="today"></i></div><div><b>S</b><i></i></div></div></article>
+          </div>
+        </div>
+        <div class="stats-row">
+          <article class="metric"><div class="metric-icon"><i data-icon="trend"></i></div><p>VOLUMEN · 4 WOCHEN</p><strong>+12,4%</strong><span>Du bewegst mehr als je zuvor.</span></article>
+          <article class="metric"><div class="metric-icon warm"><i data-icon="trophy"></i></div><p>NEUER BESTWERT</p><strong>92,5 kg</strong><span>Kniebeuge · Geschätztes 1RM</span></article>
+          <article class="last-session"><div><p class="eyebrow">LETZTES TRAINING</p><h3>Unterkörper · Stärke</h3><span>Gestern · 52 Min · 14 Arbeitssätze</span></div><div class="score"><b>8.7</b><small>LEISTUNG</small></div></article>
+        </div>
+      </section>
+
+      <section class="view" id="workout" aria-labelledby="workout-title">
+        <header class="workout-header"><button class="icon-button" data-view="dashboard" aria-label="Training verlassen"><i data-icon="close"></i></button><div><p>UPPER · WOCHE 6</p><b>18:42</b></div><button class="finish-button">Beenden</button></header>
+        <div class="workout-layout">
+          <div class="exercise-panel">
+            <div class="exercise-progress"><span>ÜBUNG 1 VON 6</span><div><i style="width:16.66%"></i></div></div>
+            <div class="exercise-heading"><div><p class="eyebrow">BRUST · LANGHANTEL</p><h1 id="workout-title">Bankdrücken</h1></div><button class="icon-button" aria-label="Übungsdetails"><i data-icon="info"></i></button></div>
+            <div class="target-card"><span>HEUTIGES ZIEL</span><div><strong>52,5 kg</strong><i></i><strong>8–10 Wdh.</strong></div><p>+2,5 kg · Ziel-RIR 2</p></div>
+            <div class="last-performance"><span>ZULETZT</span><b>50 kg × 10, 9, 8</b><small>vor 7 Tagen</small></div>
+            <div class="set-tabs" role="tablist"><button class="complete"><i data-icon="check"></i><span>SATZ 1</span><b>10</b></button><button class="active"><span>SATZ 2</span><b>Jetzt</b></button><button><span>SATZ 3</span><b>—</b></button></div>
+            <div class="input-zone">
+              <div class="stepper"><span>GEWICHT</span><div><button class="step" data-target="weight" data-delta="-2.5" aria-label="Gewicht reduzieren">−</button><p><b id="weight">52,5</b><small>kg</small></p><button class="step" data-target="weight" data-delta="2.5" aria-label="Gewicht erhöhen">+</button></div></div>
+              <div class="stepper"><span>WIEDERHOLUNGEN</span><div><button class="step" data-target="reps" data-delta="-1" aria-label="Wiederholungen reduzieren">−</button><p><b id="reps">9</b><small>Wdh.</small></p><button class="step" data-target="reps" data-delta="1" aria-label="Wiederholungen erhöhen">+</button></div></div>
+            </div>
+            <button class="complete-set"><i data-icon="check"></i><span>Satz speichern</span></button>
+          </div>
+          <aside class="rest-panel"><div class="rest-head"><p class="eyebrow">PAUSENTIMER</p><button class="icon-button" aria-label="Timer zurücksetzen"><i data-icon="reset"></i></button></div><div class="timer"><svg viewBox="0 0 120 120"><circle cx="60" cy="60" r="54"></circle><circle class="timer-progress" cx="60" cy="60" r="54"></circle></svg><div><b id="timer">01:23</b><span>VON 02:30</span></div></div><div class="timer-actions"><button data-time="-15">− 15 Sek.</button><button data-time="15">+ 15 Sek.</button></div><div class="next-up"><span>DANACH</span><h3>Schrägbank Kurzhantel</h3><p>3 Sätze · 10–12 Wdh.</p><button>Nächste Übung <i data-icon="arrow"></i></button></div></aside>
+        </div>
+      </section>
+
+      <section class="view" id="progress" aria-labelledby="progress-title">
+        <header class="topbar"><div><p class="eyebrow">DEINE ENTWICKLUNG</p><h1 id="progress-title">Fortschritt, <em>sichtbar.</em></h1></div><button class="avatar">DL</button></header>
+        <div class="range-tabs" role="tablist"><button>4W</button><button class="active">3M</button><button>6M</button><button>1J</button><button>Gesamt</button></div>
+        <div class="progress-grid">
+          <article class="chart-card"><div class="section-head"><div><p class="eyebrow">KRAFTENTWICKLUNG</p><h3>Bankdrücken</h3></div><div class="gain"><span>+8,2%</span><small>seit August</small></div></div><div class="chart"><div class="chart-labels"><span>75</span><span>70</span><span>65</span><span>60</span></div><svg viewBox="0 0 720 260" preserveAspectRatio="none"><defs><linearGradient id="area" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#c9ff4a" stop-opacity=".28"/><stop offset="1" stop-color="#c9ff4a" stop-opacity="0"/></linearGradient></defs><path class="area" d="M0 215 C90 205 110 174 180 182 S290 150 360 155 S460 112 530 122 S650 66 720 54 L720 260 L0 260Z"/><path class="line" d="M0 215 C90 205 110 174 180 182 S290 150 360 155 S460 112 530 122 S650 66 720 54"/><g class="points"><circle cx="0" cy="215" r="5"/><circle cx="180" cy="182" r="5"/><circle cx="360" cy="155" r="5"/><circle cx="530" cy="122" r="5"/><circle cx="720" cy="54" r="7"/></g></svg><div class="chart-dates"><span>01. AUG</span><span>01. SEP</span><span>01. OKT</span><span>HEUTE</span></div></div></article>
+          <article class="pr-card"><div class="pr-glow"></div><i data-icon="trophy"></i><p class="eyebrow">PERSÖNLICHER REKORD</p><h3>75 kg</h3><span>Geschätztes 1RM · Bankdrücken</span><div><b>+5 kg</b><small>in 12 Wochen</small></div></article>
+          <article class="volume-card"><p class="eyebrow">TRAININGSVOLUMEN</p><h3>32.840 kg</h3><span>Letzte 4 Wochen</span><div class="bars"><i style="height:40%"></i><i style="height:58%"></i><i style="height:51%"></i><i class="active" style="height:82%"></i></div><small><b></b> 12,4% über deinem Durchschnitt</small></article>
+          <article class="consistency-card"><div><p class="eyebrow">KONSISTENZ</p><h3>91%</h3><span>21 von 23 geplanten Einheiten</span></div><div class="consistency-ring"><span>91</span></div></article>
+        </div>
+      </section>
+    </main>
+
+    <nav class="bottom-nav" aria-label="Mobile Navigation">
+      <button class="nav-item active" data-view="dashboard"><i data-icon="home"></i><span>Übersicht</span></button><button class="nav-item" data-view="workout"><i data-icon="dumbbell"></i><span>Training</span></button><button class="nav-item" data-view="progress"><i data-icon="chart"></i><span>Fortschritt</span></button>
+    </nav>
+  </div>
+  <div class="toast" role="status" aria-live="polite"><i data-icon="check"></i><span>Satz gespeichert. Stark.</span></div>
+  <script src="app.js"></script>
+</body>
+</html>
