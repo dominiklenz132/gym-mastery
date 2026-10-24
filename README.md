@@ -18,4 +18,4 @@ Browser API and MCP share one authenticated domain service. Each user owns a sep
 
 ## Current limits
 
-Plan editing/version creation, detailed interactive charts, account deletion/export, database backups and full responsive/accessibility QA are still pending. This is not yet a completed commercial release.
+Plan editing/version creation, set corrections, own-data export and real-data strength charts are implemented. Automated tests cover core domain behavior and the shared browser/MCP service with an isolated persistence test double. The published plugin has successfully loaded the authenticated user's context. Account deletion, configured backup/restore operations, broad chart ranges and comprehensive accessibility QA remain pending. This is not yet a completed commercial release.
