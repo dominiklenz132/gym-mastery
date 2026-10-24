@@ -13,7 +13,10 @@ const specs={
  get_progression_recommendation:['Nachvollziehbare Double-Progression-Empfehlung auf gespeicherte Arbeitssätze stützen.',{sessionId:str,exerciseId:str}],
  save_training_preference:['Eine ausdrücklich genannte persönliche Trainingspräferenz speichern.',{key:str,value:str}]
 };
-const reads=new Set(['get_user_training_context','list_training_plans','get_training_plan','get_exercise_history','get_progression_recommendation']);
+specs.update_training_plan=['Trainingsplan als neue Version speichern. Bereits gestartete und abgeschlossene Einheiten bleiben historisch unverändert.',{planId:str,name:str,exercises:specs.create_training_plan[1].exercises}];
+specs.update_set=['Einen falsch erfassten Satz korrigieren. Alte Werte bleiben im Korrekturprotokoll.',{sessionId:str,setId:str,weight:num,reps:integer}];
+specs.export_training_data=['Alle eigenen Trainingsdaten für einen Datenexport abrufen.',{}];
+const reads=new Set(['get_user_training_context','list_training_plans','get_training_plan','get_exercise_history','get_progression_recommendation','export_training_data']);
 const tools=Object.entries(specs).map(([name,[description,properties]])=>({name,description,inputSchema:{type:'object',properties,required:Object.keys(properties).filter(k=>!['rir','pain','increment'].includes(k)),additionalProperties:false},annotations:{readOnlyHint:reads.has(name),destructiveHint:false,idempotentHint:reads.has(name)||['log_set','start_workout','finish_workout'].includes(name),openWorldHint:false},_meta:{ui:{resourceUri:'ui://gym-mastery/app.html'},'openai/outputTemplate':'ui://gym-mastery/app.html'}}));
 const json=(data,status=200)=>new Response(JSON.stringify(data),{status,headers:{'Content-Type':'application/json','Cache-Control':'no-store'}});
 async function run(env,user,name,args){
@@ -35,6 +38,7 @@ export default {async fetch(req,env){
  if(url.pathname==='/api/action'){
   if(!user)return json({error:'Anmeldung erforderlich'},401);
   if(req.method!=='POST')return json({error:'POST erforderlich'},405);
+  if(Number(req.headers.get('content-length'))>65536)return json({error:'Anfrage zu groß'},413);
   if(req.headers.get('origin')&&req.headers.get('origin')!==url.origin)return json({error:'Origin abgelehnt'},403);
   try{const {name,args={}}=await req.json();return json(await run(env,user,name,args));}catch(e){return json({error:e.message},400);}
  }
