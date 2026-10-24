@@ -1,12 +1,14 @@
 import {readFileSync,mkdirSync,writeFileSync} from 'node:fs';
 import {execFileSync} from 'node:child_process';
 import {build} from 'esbuild';
+import {createHash} from 'node:crypto';
 import {Resvg} from '@resvg/resvg-js';
 mkdirSync('dist',{recursive:true});
 await build({entryPoints:['src/main.jsx'],bundle:true,minify:true,format:'iife',target:'es2022',outfile:'dist/app.js',define:{'process.env.NODE_ENV':'"production"'},loader:{'.webp':'dataurl'},logLevel:'warning'});
 execFileSync(process.execPath,['node_modules/@tailwindcss/cli/dist/index.mjs','-i','src/theme.css','-o','dist/styles.css','--minify'],{stdio:'inherit'});
 writeFileSync('dist/styles.css',readFileSync('dist/styles.css','utf8')+'\n'+readFileSync('src/mobile.css','utf8'));
-writeFileSync('dist/index.html',readFileSync('src/index.html'));
+const assetVersion=path=>createHash('sha256').update(readFileSync(path)).digest('hex').slice(0,12);
+writeFileSync('dist/index.html',readFileSync('src/index.html','utf8').replace('href="styles.css"',`href="styles.css?v=${assetVersion('dist/styles.css')}"`).replace('src="app.js"',`src="app.js?v=${assetVersion('dist/app.js')}"`));
 let source=readFileSync('server/worker.js','utf8');
 const pngs=Object.fromEntries([192,512].map(size=>[size,Buffer.from(new Resvg(readFileSync('src/icon.svg'),{fitTo:{mode:'width',value:size}}).render().asPng()).toString('base64')]));
 source=source.replace("'__PNGS__'",()=>JSON.stringify(pngs));
