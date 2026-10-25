@@ -1,4 +1,4 @@
-import {initialState,apply} from './domain.js';
+import {initialState,apply,trainingContext} from './domain.js';
 const HTML='__HTML__',CSS='__CSS__',JS='__JS__';
 const MANIFEST='__MANIFEST__',ICON='__ICON__',SW='__SW__';
 const PNGS='__PNGS__';
@@ -26,9 +26,9 @@ async function run(env,user,name,args){
  for(let attempt=0;attempt<4;attempt++){
   const row=await env.DB.prepare('SELECT revision,data FROM training_state WHERE user_id=?').bind(user).first();
   const state=row?JSON.parse(row.data):initialState();const result=apply(state,name,args);
-  if(reads.has(name))return {result,state};
+  if(reads.has(name))return {result,state:trainingContext(state)};
   const write=row?await env.DB.prepare('UPDATE training_state SET revision=revision+1,data=?,updated_at=? WHERE user_id=? AND revision=?').bind(JSON.stringify(state),new Date().toISOString(),user,row.revision).run():await env.DB.prepare('INSERT OR IGNORE INTO training_state(user_id,revision,data,updated_at) VALUES(?,0,?,?)').bind(user,JSON.stringify(state),new Date().toISOString()).run();
-  if(write.meta.changes)return {result,state};
+  if(write.meta.changes)return {result,state:trainingContext(state)};
  }
  throw Error('Gleichzeitige Änderung. Bitte erneut versuchen.');
 }

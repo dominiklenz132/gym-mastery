@@ -12,6 +12,6 @@ writeFileSync('dist/index.html',readFileSync('src/index.html','utf8').replace('h
 let source=readFileSync('server/worker.js','utf8');
 const pngs=Object.fromEntries([192,512].map(size=>[size,Buffer.from(new Resvg(readFileSync('src/icon.svg'),{fitTo:{mode:'width',value:size}}).render().asPng()).toString('base64')]));
 source=source.replace("'__PNGS__'",()=>JSON.stringify(pngs));
-source=source.replace("import {initialState,apply} from './domain.js';",()=>readFileSync('server/domain.js','utf8').replaceAll('export ',''));
+source=source.replace("import {initialState,apply,trainingContext} from './domain.js';",()=>readFileSync('server/domain.js','utf8').replaceAll('export ',''));
 for(const [key,path] of Object.entries({HTML:'dist/index.html',CSS:'dist/styles.css',JS:'dist/app.js',MANIFEST:'src/manifest.webmanifest',ICON:'src/icon.svg',SW:'src/sw.js'}))source=source.replace(`'__${key}__'`,()=>JSON.stringify(readFileSync(path,'utf8')));
 mkdirSync('dist/server',{recursive:true});writeFileSync('dist/server/index.js',source);

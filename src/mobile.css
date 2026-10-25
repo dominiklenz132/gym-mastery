@@ -1,4 +1,24 @@
 /* Shrink real content, not just the scrollbar. Grid items default to min-width:auto. */
+/* A sticky outline must not float over the full-width timer row while scrolling. */
+.training-outline{position:static}
+.training-side,.rest-card,.training-main{min-inline-size:0}
+.rest-card{display:block;overflow-wrap:anywhere}
+.rest-heading{display:flex;align-items:center;justify-content:space-between;gap:8px;text-align:left;width:100%}
+.rest-heading .button{width:44px;height:44px;flex:0 0 44px;padding:0}
+.rest-ring{width:min(175px,100%);max-width:100%;margin:16px auto}
+.rest-actions{display:grid;gap:6px;width:100%}
+.rest-card .rest-actions .button{min-width:0;white-space:normal;min-height:44px}
+.timer-toggle{display:flex;align-items:center;gap:10px;font-size:12px;min-height:48px;margin-top:12px;text-align:left}
+.timer-toggle input{width:20px;height:20px;accent-color:var(--accent)}
+.rest-settings{padding-top:15px;border-top:1px solid var(--border);text-align:left}
+.rest-presets{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:6px;margin-bottom:16px}
+.rest-presets .button{min-height:44px;font-size:11px}
+.rest-settings form{display:grid;gap:12px}.rest-settings .caption{margin-top:12px;line-height:1.6}
+.rest-disabled{padding:25px 0;color:var(--muted)}.rest-disabled svg{margin:0 auto 14px;color:var(--accent)}.rest-disabled h3{font-size:18px;margin-bottom:10px}.rest-disabled p{font-size:12px}
+.shared-performance{font-size:11px;line-height:1.6;color:var(--muted);margin:-3px 0 16px}
+.workout-complete{display:flex;gap:10px;align-items:center;font-size:12px;line-height:1.6;color:var(--accent);margin:12px 0}
+.logged-sets>div{flex-wrap:wrap;gap:8px}.logged-sets .button{margin-left:auto;width:44px;height:44px}
+.shared-plan-performance{color:var(--accent)!important;line-height:1.5!important}
 .coach-chat-bottom>.field-label{display:block;margin-bottom:16px}
 .coach-draft{margin-bottom:16px}
 .coach-draft .input{font-family:monospace;font-size:14px}
