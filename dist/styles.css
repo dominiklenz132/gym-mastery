@@ -89,3 +89,39 @@
  .training-target b span{display:block;margin-top:2px}
  .effort-details summary{font-size:11px}
 }
+
+/* Floating mobile dock; reserve room below content and above the home indicator. */
+@media(max-width:640px){
+ html{scroll-padding-bottom:calc(120px + env(safe-area-inset-bottom))}
+ .main-content{padding-bottom:calc(124px + env(safe-area-inset-bottom))}
+ .mobile-nav{
+  left:max(12px,env(safe-area-inset-left));
+  right:max(12px,env(safe-area-inset-right));
+  bottom:calc(12px + env(safe-area-inset-bottom));
+  max-width:420px;margin-inline:auto;padding:6px;gap:4px;
+  border:1px solid color-mix(in srgb,var(--text) 13%,transparent);
+  border-radius:25px;
+  background:color-mix(in srgb,var(--sidebar) 91%,transparent);
+  -webkit-backdrop-filter:blur(22px) saturate(130%);
+  backdrop-filter:blur(22px) saturate(130%);
+  box-shadow:0 10px 35px #0005,inset 0 1px 0 #ffffff08;
+ }
+ .mobile-nav button{
+  min-height:54px;gap:5px;padding:6px 3px;border-radius:18px;
+  border:1px solid transparent;font-size:10px;line-height:1.2;
+  transition:background-color .18s ease,color .18s ease,border-color .18s ease;
+ }
+ .mobile-nav button>svg{width:20px;height:20px;stroke-width:1.8}
+ .mobile-nav .selected{
+  background:color-mix(in srgb,var(--accent) 9%,transparent);
+  border-color:color-mix(in srgb,var(--accent) 13%,transparent);
+ }
+ .mobile-nav .selected>span{font-weight:600}
+ .mobile-nav .selected:after{display:none}
+ .mobile-nav button:focus-visible{outline:2px solid var(--accent);outline-offset:0}
+ .toast{bottom:calc(98px + env(safe-area-inset-bottom))}
+ [data-theme=light] .mobile-nav{
+  background:color-mix(in srgb,var(--panel) 93%,transparent);
+  box-shadow:0 8px 30px #24301820,inset 0 1px 0 #fff8;
+ }
+}
